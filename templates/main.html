@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Finance App</title>
+    <style>
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+        .result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(250, 251, 251); text-align: center;">
+
+   <h1 style="font-style: italic; background-color: rgb(245, 220, 220);">My Finance Model</h1>
+   <h3>This app is designed to help you analyze your stock portfolio!</h3>
+
+   <form method="POST">
+        <label> Time Frame (days)</label>
+        <br>
+        <input type="text" name="dias">
+        <br>
+        <label> Stock (code)</label>
+        <br>
+        <input type="text" name="share_to_buy">
+        <br>
+   </form>
+
+   <div class="result">
+       <!-- Aqui você pode exibir o gráfico e texto resultantes -->
+       <h3>The result of your prediction is:</h3>
+       <img src="{{plot_data()}}" alt="Graph">
+   </div>
+
+</body>
+</html>
