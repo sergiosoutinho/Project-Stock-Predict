@@ -27,11 +27,11 @@ try:
     # put the inputs in a column
     with col2: 
         # define the stock out of list to analyze
-        share = st.radio("Market", list(market.keys()))      
+        share = st.radio("Indexfunds", list(market.keys()))      
         # define the market to analyze     
-        share_to_analyze = st.radio("Stock", market[share])
+        share_to_analyze = st.radio("Ticker", market[share])
         # define the stock in the list to analyze
-        stock_to_analyze = st.text_input("Write a Stock to Analyze (.SA)") 
+        stock_to_analyze = st.text_input("Write a Ticker to Analyze (.SA)") 
 
          
         # define a new stock to analyze out of the list

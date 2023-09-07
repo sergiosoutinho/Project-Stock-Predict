@@ -33,11 +33,11 @@ try:
         # define the indicators in the page
         indicators = st.multiselect("Indicators", ["sma_21", "sma_50", "sma_200", "ema_21", "ema_50", "ema_200", "macd_21", "macd_50", "macd_200", "rsi_21", "rsi_50", "rsi_200"])
         # define the stock out of list to analyze
-        share = st.radio("Market", list(market.keys()))      
+        share = st.radio("Indexfunds", list(market.keys()))      
         # define the market to analyze     
-        share_to_analyze = st.radio("Stock", market[share])
+        share_to_analyze = st.radio("Ticker", market[share])
         # define the stock in the list to analyze
-        stock_to_analyze = st.text_input("Write a Stock to Analyze (.SA)") 
+        stock_to_analyze = st.text_input("Write a Ticker to Analyze (.SA)") 
         
         
 
@@ -176,9 +176,9 @@ try:
             st.write(f" - The **{share_to_buy}** price was **{price_store.iloc[0]:,.2f}** in **{date_store}**")
             try:
                 if sma_200[-1] < sma_50[-1]:
-                    st.write(f" - The stock **{share_to_buy}** trend is **upward** according to the moving average")
+                    st.write(f" - The Ticker **{share_to_buy}** trend is **upward** according to the moving average")
                 else:
-                    st.write(f" - The stock **{share_to_buy}** trend is **down** according to the moving average")
+                    st.write(f" - The Ticker **{share_to_buy}** trend is **down** according to the moving average")
             except:
                 pass
 

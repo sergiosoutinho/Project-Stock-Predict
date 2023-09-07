@@ -17,7 +17,7 @@ from sklearn.metrics import mean_squared_error
 col1, col2 = st.columns([4,1])
 with col2:
     p = st.select_slider("Select ARIMA P",[1,2,3,4,5,6,7,8,9,10])
-    stock_to_analyze = st.text_input("Stock to Analyze")
+    stock_to_analyze = st.text_input("Ticker to Analyze")
 
 
 with col1:
