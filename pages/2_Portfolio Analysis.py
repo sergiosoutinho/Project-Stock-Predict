@@ -106,3 +106,5 @@ except:
     st.header("Choice a Portfolio to Analyze...")
     st.write("---")
     pass
+
+st.sidebar.image("images/logo.png", use_column_width=True)

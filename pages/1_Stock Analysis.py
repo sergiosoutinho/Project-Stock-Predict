@@ -203,6 +203,6 @@ except:
     pass    
 
     
-
+st.sidebar.image("images/logo.png", use_column_width=True)
 
 

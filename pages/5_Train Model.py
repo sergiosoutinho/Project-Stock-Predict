@@ -117,3 +117,5 @@ with col1:
         st.write("---")
         st.header("Choice a stock to train the model...")
         st.write("---")
+
+st.sidebar.image("images/logo.png", use_column_width=True)

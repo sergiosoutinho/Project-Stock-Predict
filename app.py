@@ -63,3 +63,7 @@ This page allows you to analyze your investment portfolio. Follow these steps:""
     st.subheader("""We hope this user manual helps you navigate our app effectively. If you have any further questions or need assistance, please don't hesitate to reach out to our support team. Happy investing!""") 
     
       # Coloque aqui o conteúdo do manual, seja texto ou um link para o manual em inglês.
+
+
+# Adicionando a imagem
+st.sidebar.image("images/logo.png", use_column_width=True)

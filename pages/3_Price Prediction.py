@@ -57,3 +57,5 @@ with col1:
         st.write("---")
         st.header("Choice a stock to Predict")
         st.write("---")
+
+st.sidebar.image("images/logo.png", use_column_width=True)

@@ -88,3 +88,5 @@ except:
     st.header("Choice a stock to see the news...")
     st.write("---")
     pass    
+
+st.sidebar.image("images/logo.png", use_column_width=True)
