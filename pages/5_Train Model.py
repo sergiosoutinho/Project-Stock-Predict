@@ -1,3 +1,4 @@
+from sklearn.metrics import mean_squared_error
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,14 +10,11 @@ import numpy as np
 import statsmodels.api as sm
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 yfinance.pdr_override()
-from sklearn.metrics import mean_squared_error
 
 
-
-
-col1, col2 = st.columns([4,1])
+col1, col2 = st.columns([4, 1])
 with col2:
-    p = st.select_slider("Select ARIMA P",[1,2,3,4,5,6,7,8,9,10])
+    p = st.select_slider("Select ARIMA P", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     stock_to_analyze = st.text_input("Ticker to Analyze")
 
 
@@ -26,7 +24,7 @@ with col1:
 
         # DEFINE TIME
         share_to_buy = stock_to_analyze
-        dias=1900
+        dias = 1900
         # DEFINE DATE
         data_inicial = datetime.now() - timedelta(days=dias)
         data_final = datetime.now()
@@ -37,15 +35,17 @@ with col1:
 
         st.title(f"Training Model for {company_name}")
         # TAKE DATA
-        share_ibov = pdr.get_data_yahoo(share_to_buy+".SA", data_inicial, data_final)["Adj Close"]
+        share_ibov = pdr.get_data_yahoo(
+            share_to_buy+".SA", data_inicial, data_final)["Adj Close"]
         # TRANSFORM THE DATA
         share_ts = share_ibov.resample("MS").mean()
 
-        col11, col22, col33 = st.columns([1,1,1])
+        col11, col22, col33 = st.columns([1, 1, 1])
 
         with col11:
             # EXPLORATORY DATA ANALYSIS
-            decomposition = sm.tsa.seasonal_decompose(share_ts, model = "additive")
+            decomposition = sm.tsa.seasonal_decompose(
+                share_ts, model="additive")
             fig = decomposition.plot()
             plt.tight_layout()
             # Exibir o gráfico no Streamlit
@@ -73,7 +73,7 @@ with col1:
             plt.title('Partial Autocorrelation Function (PACF)')
 
             # Exibir a plot PACF no Streamlit
-            st.pyplot(fig_pacf)            
+            st.pyplot(fig_pacf)
 
         with col11:
             # Differencing
@@ -94,11 +94,11 @@ with col1:
             train = share_ts[:size]
             test = share_ts[size:]
 
-            #Because our data has seasonality, we should run SARIMA instead of ARIMA
-            model = sm.tsa.arima.ARIMA(train, order = (p,2,3), seasonal_order = (0,0,1,12)).fit()
-            #PREDICTION
-            pred = model.predict(start = len(train), end = len(share_ts)-1)           
-
+            # Because our data has seasonality, we should run SARIMA instead of ARIMA
+            model = sm.tsa.arima.ARIMA(train, order=(
+                p, 2, 3), seasonal_order=(0, 0, 1, 12)).fit()
+            # PREDICTION
+            pred = model.predict(start=len(train), end=len(share_ts)-1)
 
             # PLOT THE DATA WITH THE PREDICTIONS, TRAIN AND TEST
             train.plot(legend=True, label="train")
@@ -107,11 +107,8 @@ with col1:
             plt.tight_layout()
             st.pyplot(plt)
 
-
         squared_error = np.sqrt(mean_squared_error(test, pred))
         st.write(f"The RMSE is: {squared_error:.2f}")
-
-
 
     except:
         st.write("---")

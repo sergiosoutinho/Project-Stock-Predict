@@ -76,7 +76,7 @@ try:
             st.header(f"You have $ {valor_inv:,.0f} in investments")
 
         with col11:
-            st.subheader("My Portfolio x Indexfunds")
+            st.subheader("My Portfolio x Index funds")
 
             # normalize and concat the data
             df_ibov_norm = pd.DataFrame(df_ibov / df_ibov.iloc[0])
@@ -85,7 +85,7 @@ try:
             newdf = pd.concat([df_ibov_norm, df_valor_investido_norm], axis=1)
 
             # rename the columns
-            newdf.rename(columns={"Adj Close": "Indexfunds",
+            newdf.rename(columns={"Adj Close": "Index funds",
                          "Total": "Portfolio"}, inplace=True)
 
             # print the chart

@@ -1,4 +1,4 @@
-#import libraries 
+# import libraries
 
 import streamlit as st
 import pandas as pd
@@ -14,61 +14,58 @@ yfinance.pdr_override()
 try:
 
     # stock list
-    lista_bovespa = ["PETR4.SA","ITSA4.SA","VALE3.SA","ABEV3.SA","BBAS3.SA", "VIVA3.SA"]
-    lista_portugal = ["EDP.LS","CTT.LS","PGAL","SCP.LS"]
-    lista_eua = ["AAPL","MSFT","GOOGL","AMZN", "META"]
+    lista_bovespa = ["PETR4.SA", "ITSA4.SA",
+                     "VALE3.SA", "ABEV3.SA", "BBAS3.SA", "VIVA3.SA"]
+    lista_portugal = ["EDP.LS", "CTT.LS", "PGAL", "SCP.LS"]
+    lista_eua = ["AAPL", "MSFT", "GOOGL", "AMZN", "META"]
 
     # market list
-    market = {"PSI20.LS":lista_portugal, "^BVSP":lista_bovespa, "^DJI":lista_eua}
-    
+    market = {"PSI20.LS": lista_portugal,
+              "^BVSP": lista_bovespa, "^DJI": lista_eua}
+
     # define the columns to divide the page
-    col1, col2 = st.columns([4,1])
-    
+    col1, col2 = st.columns([4, 1])
+
     # put the inputs in a column
-    with col2: 
+    with col2:
         # define the stock out of list to analyze
-        share = st.radio("Indexfunds", list(market.keys()))      
-        # define the market to analyze     
+        share = st.radio("Index funds", list(market.keys()))
+        # define the market to analyze
         share_to_analyze = st.radio("Ticker", market[share])
         # define the stock in the list to analyze
-        stock_to_analyze = st.text_input("Write a Ticker to Analyze (.SA)") 
+        stock_to_analyze = st.text_input("Write a Ticker to Analyze (.SA)")
 
-         
         # define a new stock to analyze out of the list
         if stock_to_analyze != "":
             share_to_buy = stock_to_analyze
         else:
             share_to_buy = share_to_analyze
-  
 
     # column with the data visualization
-    with col1: 
+    with col1:
 
-
-        #function to take data from yahoofinance
-        def take_data(): 
+        # function to take data from yahoofinance
+        def take_data():
 
             # define period
             data_inicial = datetime.now() - timedelta(days=30)
             data_final = datetime.now()
             # define data to compare
-            df_ibov = pdr.get_data_yahoo(share, data_inicial, data_final)["Adj Close"]
-            
+            df_ibov = pdr.get_data_yahoo(
+                share, data_inicial, data_final)["Adj Close"]
+
             # define data to analyze
-            share_ibov = pdr.get_data_yahoo(share_to_buy, data_inicial, data_final)["Adj Close"]    
+            share_ibov = pdr.get_data_yahoo(
+                share_to_buy, data_inicial, data_final)["Adj Close"]
 
             return df_ibov, share_ibov
 
-        
-
         # take the data
-        df_ibov, share_ibov = take_data()         
+        df_ibov, share_ibov = take_data()
 
         ticker = share_to_buy
         info = yfinance.Ticker(ticker).info
         company_name = info['longName']
-   
-      
 
         st.title(f"NEWS - {company_name}")
         st.write("---")
@@ -81,12 +78,10 @@ try:
             st.write("")
 
 
-
-
 except:
     st.write("---")
     st.header("Choice a stock to see the news...")
     st.write("---")
-    pass    
+    pass
 
 st.sidebar.image("images/logo.png", use_column_width=True)
